@@ -15,6 +15,7 @@ TIMEOUT = 5
 def _get_args():
     parser = OptionParser(usage="usage: %prog [options] args")
     parser.add_option("-u", "--url", help="Target URL", dest='url')
+    parser.add_option("-d", "--dic", help="Dictionary path", dest='dic')
     parser.add_option("-n", "--number", help="Number of Thread,Default 5",
                       dest="num", type="int", default=5)
     parser.add_option("-t", "--timeout", help="Timeout,Default 5",
@@ -58,10 +59,11 @@ def main():
     if url.endswith("/"):
         url = url[:-1]
     num = opts.num
+    dict_path = opts.dic or "all.txt"
     global TIMEOUT
     TIMEOUT = opts.timeout
     if url:
-        f = open("all.txt").read()
+        f = open(dict_path).read()
         dirs = f.split("\r\n")
         tempdirs = []
         for r in dirs:
